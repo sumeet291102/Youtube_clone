@@ -89,9 +89,10 @@
                     <div> 
                         <a href="/video/?id={{ entry.video_id }}">
                             <!-- <img class="video" src="{{ entry.url }}" alt=""> -->
-                            <video class="vid">
+                            <!-- <video class="vid">
                                 <source src="{{entry.url}}" type="video/mp4">
-                            </video> 
+                            </video>  -->
+                            <img src="{{entry.url}}" alt="">
                             <p>{{ entry.title }}</p>
                             <a href="/user/?{{ entry.uploaded_by__username }}">{{ entry.uploaded_by__username }}</a>
                         </a>
