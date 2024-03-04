@@ -83,20 +83,20 @@ WSGI_APPLICATION = "youtube_clone.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "test_db2",
-#         "USER": "sumeet291102",
-#         "PASSWORD": "123789",
-#         "HOST": "127.0.0.1",
-#         "PORT": "5432",
-#     }
-# }
-
 DATABASES = {
-    "default":  dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "test_db2",
+        "USER": "sumeet291102",
+        "PASSWORD": "123789",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    }
 }
+
+# DATABASES = {
+#     "default":  dj_database_url.parse(os.environ.get("DATABASE_URL"))
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
