@@ -1,0 +1,105 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    justify-content: space-between;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    padding: 0 20px;
+    position: fixed;
+}
+
+header>div {
+    display: flex;
+}
+
+header>div:nth-child(2) {
+    width: 30%;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+header>div:nth-child(3) {
+    align-items: center;
+    gap: 0.6rem;
+}
+
+img {
+    width: 100%;
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.icon  {
+    width: 20px;
+}
+
+.youtube {
+    height: 50px;
+    width: 120px;
+    padding-left: 10px;
+}
+
+.search {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.8rem;
+    border: solid 1px black;
+    padding: 5px 15px;
+    border-radius: 30px;
+}
+
+.search_input {
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.lb {
+    display: flex;
+    align-items: center;
+}
+
+.home {
+    display: flex;
+    height: 100vh;
+    padding-top: 50px;
+}
+
+.sidebar {
+    min-width: 200px;
+    display: grid;
+    height: fit-content;
+    padding-top: 20px;
+    gap:2rem;
+}
+
+.sidebar>div {
+    border-bottom: solid black 1px;
+    padding-bottom: 40px;
+    margin: 0 20px;
+}
+
+.sidebar_ele {
+    display: grid;
+    gap: 1rem;
+}
+
+.sidebar_ele>div {
+    display: flex;
+    gap: 1rem;
+}
+
+.main {
+    overflow: scroll;
+}

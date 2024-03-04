@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'user.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div>
+            <img class="icon" src="{% static 'icons8-hamburger-menu.svg' %}" alt="">
+            <a href="/">
+                <img class="youtube" src="{% static 'YouTube-Logo.wine.svg' %}" alt="">
+            </a>
+        </div>
+        <div>
+            <div class="search">
+                <input class="search_input" type="text">
+                <img class="icon" src="{% static 'icons8-search.svg' %}" alt="">
+            </div>
+            <img class="icon" src="{% static 'microphone-svgrepo-com.svg' %}" alt="">
+        </div>
+        <div>
+            <a href="/create/">
+                <img class="icon" src="{% static 'add-video-icon.svg' %}" alt="">
+            </a>
+            <img class="icon" src="{% static 'notification-bell-svgrepo-com.svg' %}" alt="">
+            {% if user == 'null' %}
+                <a class="lb" href="{% url 'login_page' %}">login</a>
+            {% else %}
+                <a class="lb" href="{% url 'logout_view' %}">logout</a>
+            {% endif %}
+        </div>
+    </header>
+    <div class="home">
+        <div class="sidebar">
+            <div class="sidebar_ele">
+                <div>
+                    <img class="icon" src="{% static 'icons8-home.svg' %}" alt="">
+                    <p>Home</p>
+                </div>
+                <div>
+                    <img class="icon" src="{% static 'icons8-youtube-shorts.svg' %}" alt="">
+                    <p>Shorts</p>
+                </div>
+                <div>
+                    <img class="icon" src="{% static 'video-playlist-icon.svg' %}" alt="">
+                    <p>subscriptions</p>
+                </div>
+            </div>
+            <div class="sidebar_ele">
+                <p>You</p>
+                <div>
+                    <img class="icon" src="{% static 'user-channel(1).svg' %}" alt="">
+                    <p>Your channel</p>
+                </div>
+                <div>
+                    <img class="icon" src="{% static 'history-svgrepo-com.svg' %}" alt="">
+                    <p>History</p>
+                </div>
+                <div>
+                    <img class="icon" src="{% static 'play-1008-svgrepo-com.svg' %}" alt="">
+                    <p>Your Video</p>
+                </div>
+                <div>
+                    <img class="icon" src="{% static 'watch-later.svg' %}" alt="">
+                    <p>Watch later</p>
+                </div>
+                <div>
+                    <img class="icon" src="{% static 'like-svgrepo-com.svg' %}" alt="">
+                    <p>liked videos</p>
+                </div>
+            </div>
+            <div class="sidebar_ele">
+                <p>subscriptions</p>
+            </div>
+            
+            
+            
+        </div>
+        <div class="main">
+            user
+        </div>
+    </div>
+</body>
+</html>

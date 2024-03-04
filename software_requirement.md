@@ -9,7 +9,6 @@
         - passion to learn and grow
         - curiosity to explore different programming languages, frameworks, and technologies
         - build a successful career in software engineering
-
     - challenges
         - finding high-quality educational content amidst the vast amount of videos on YouTube
         - manage time between watching educational videos and entertaining videos
@@ -25,7 +24,6 @@
     - motivations
         - love for teaching and helping others learn complex concepts in a simple manner
         - potential to generate a passive income stream
-
     - challenges
         - creating engaging and informative content that stands out the crowd
         - growing subscriber base and increasing engagement on her videos

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'signup.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        
+        <form action="", method="post">
+            {% csrf_token %}
+            <div>
+                <img src="{% static 'Google-Logo.wine.svg' %}" alt="">
+            </div>
+            <p>Create a YouTube Account</p>
+            <input type="text" name="name" id="" placeholder="username"  required>
+            <input type="text" name="first_name" id="" placeholder="first name" required>
+            <input type="text" name="last_name" id="" placeholder="last name (optional)">
+            <input type="email" name="email" id="" placeholder="email" required>
+            <input type="password" name="password" id="" placeholder="password" required>
+            <div class="form_footer">
+                <a href="{% url 'login_page' %}">Already have an account?</a>
+                <button type="submit">register</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

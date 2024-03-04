@@ -1,0 +1,23 @@
+.search_input {
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.main {
+    display: flex;
+    padding-top: 20px;
+}
+
+.main_left {
+    width: 75%;
+    overflow: scroll;
+}
+
+.main_right {
+    display: grid;
+    gap: 2rem;
+    padding: 0 2%;
+    width: 25%;
+    overflow: scroll;
+}
