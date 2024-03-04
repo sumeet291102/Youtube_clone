@@ -83,6 +83,7 @@
                 <video  controls>
                     <source src="{{video.url}}" type="video/mp4">
                 </video> 
+                <p>{{video.uploaded_by__username}}</p>
                 <p>{{video.title}}</p>
                 <p>{{video.description}}</p>
                 <a href="/subscribe/?video={{video.video_id}}&subscribee={{video.uploaded_by}}&subscriber={{user}}">subscribe</a>
@@ -102,7 +103,7 @@
                 {% endfor %}
             </div>
             <div class="main_right">
-                {% for entry in videos_data %}
+                {% for entry in data %}
                     <div> 
                         <a href="/video/?id={{entry.video_id}}">
                             <video class="vid">

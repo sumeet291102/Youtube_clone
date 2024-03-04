@@ -77,12 +77,22 @@
             <div class="sidebar_ele">
                 <p>subscriptions</p>
             </div>
-            
-            
-            
         </div>
         <div class="main">
-            user
+            <div class="content">
+                {% for entry in data %}
+                    <div> 
+                        <a href="/video/?id={{ entry.video_id }}">
+                            <!-- <img class="video" src="{{ entry.url }}" alt=""> -->
+                            <video class="vid">
+                                <source src="{{entry.url}}" type="video/mp4">
+                            </video> 
+                            <!-- <img src="{{entry.url}}" alt=""> -->
+                            <p>{{ entry.title }}</p>
+                        </a>
+                    </div> 
+                {% endfor %}
+            </div>
         </div>
     </div>
 </body>

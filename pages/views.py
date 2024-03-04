@@ -71,7 +71,9 @@ def video_page(request, *args, **kwargs):
 
 
 def user_page(request, *args, **kwargs):
-    return render(request, 'user.html')
+    user_videos = Video.objects.filter(uploaded_by__username=request.GET.get('uname')).values()
+    
+    return render(request, 'user.html', {'data': user_videos})
 
 
 def logout_view(request, *args, **kwargs):

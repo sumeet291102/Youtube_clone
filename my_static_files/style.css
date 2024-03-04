@@ -102,4 +102,5 @@ video {
 
 .main {
     overflow: scroll;
+    padding-top: 20px;
 }

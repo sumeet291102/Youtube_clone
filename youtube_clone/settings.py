@@ -18,9 +18,6 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
-MEDIA_URL = '/youtube_clone/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -29,9 +26,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 SECRET_KEY = "django-insecure-jkm+=bl(gd*kaa-x7m4jb7js#%rbm&2g!!l6n3tw1v2jf4(=in"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -44,8 +41,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'cloudinary_storage',
-    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -95,8 +90,15 @@ WSGI_APPLICATION = "youtube_clone.wsgi.application"
 # }
 
 DATABASES = {
-    "default":  dj_database_url.parse(os.environ.get("DATABASE_URL"))
+       "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 }
+
+# DATABASES = {
+#     "default":  dj_database_url.parse(os.environ.get("DATABASE_URL"))
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -138,13 +140,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'my_static_files'
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'drdxnvici',
-    'API_KEY': '147316945472445',
-    'API_SECRET': 'Py_ZATy3Gi6meweVwLb3UN5x0nI',
-}
