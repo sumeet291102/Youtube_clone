@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="user_desc" placeholder="user description">
+        <label for="profile_pic">profile picture</label>
+        <input type="file" id="profile_pic" name="profile_pic">
+        <label for="profile_cover">profile cover</label>
+        <input type="file" id="profile_cover" name="profile_cover">
+        <button>update</button>
+    </form>
+</body>
+</html>

@@ -29,3 +29,9 @@ class Subscribe(models.Model):
     subscriber = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscriber')
     subscribee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscribee')
     subscribed_at = models.DateTimeField(auto_now_add=True)
+
+class Detail(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile_pic = models.URLField(null=True)
+    profile_cover = models.URLField(null=True)
+    user_description = models.TextField()

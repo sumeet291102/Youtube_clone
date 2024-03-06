@@ -79,6 +79,41 @@
             </div>
         </div>
         <div class="main">
+            <div>
+                {% if detail.profile_cover %}
+                    <div style="background-image:url('{{detail.profile_cover}}')" class="cover">
+                    </div>
+                {% else %}
+                    <div style="background-color: gray" class="cover">
+                    </div>
+                {% endif %}
+                <div class="info">
+                    {% if detail.profile_pic%}
+                        <div style="background-image:url('{{detail.profile_pic}}')" class="profile">
+                        </div>
+                    {% else %}
+                        <div style="background-image:url('{% static 'user-profile-avatar-svgrepo-com.svg' %}')" class="profile">
+                        </div>
+                    {% endif %}
+                    <div class="info_details">
+                        <p>{{curr_user}}</p>
+                        <p>{{curr_user.first_name}} {{curr_user.last_name}} {{subscribers_count}} subscribers . {{data.count}} videos</p>
+                        <p>{{detail.user_description}}</p>
+                        {% if subscribed == True %}
+                            <p>
+                                <a href="/subscribe/?uname={{curr_user}}&subscribee={{curr_user}}&subscriber={{user}}">subscribed</a>
+                            </p>
+                        {% else %}
+                            <p>
+                                <a href="/subscribe/?uname={{curr_user}}&subscribee={{curr_user}}&subscriber={{user}}">subscribe</a>
+                            </p>
+                        {% endif %}
+                        <p>
+                            <a href="/update/?uname={{user}}">edit profile</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
             <div class="content">
                 {% for entry in data %}
                     <div> 

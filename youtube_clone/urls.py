@@ -20,7 +20,7 @@ from django.urls import path, include
 # from pages.views import home_page
 from django.conf import settings
 from django.conf.urls.static import static
-from pages.views import home_page, signup_page, login_page, create_page, video_page, user_page, logout_view, subscribe_view, like_view, comment_view
+from pages.views import home_page, signup_page, login_page, create_page, video_page, user_page, logout_view, subscribe_view, like_view, comment_view, update_page
 
 urlpatterns = [
     # path("probs/", include("probs.urls")),
@@ -31,6 +31,7 @@ urlpatterns = [
     path("create/", create_page, name="create_page"),
     path("video/", video_page, name="video_page"),
     path("user/", user_page, name="user_page"),
+    path("update/", update_page, name="update_page"),
     path("logout/", logout_view, name="logout_view"),
     path("like/", like_view, name="like_view"),
     path("comment/", comment_view, name="comment_view"),

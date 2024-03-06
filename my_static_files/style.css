@@ -87,17 +87,31 @@ video {
 .sidebar>div {
     border-bottom: solid black 1px;
     padding-bottom: 40px;
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 .sidebar_ele {
     display: grid;
+    /* gap: 1rem; */
+}
+
+
+.sidebar_ele>p {
+    padding: 0 0 20px 10px;
+}
+
+.sidebar_button {
+    padding: 10px 12px;
+}
+
+.sidebar_button>a {
+    display: flex;
     gap: 1rem;
 }
 
-.sidebar_ele>div {
-    display: flex;
-    gap: 1rem;
+.sidebar_button:hover {
+    background-color: gray;
+    border-radius: 20px;
 }
 
 .main {

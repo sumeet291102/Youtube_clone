@@ -83,13 +83,26 @@
                 <video  controls>
                     <source src="{{video.url}}" type="video/mp4">
                 </video> 
-                <p>{{video.uploaded_by__username}}</p>
                 <p>{{video.title}}</p>
+                <div>
+                    <a href="/user/?uname={{video.uploaded_by}}">
+                        <p>{{video.uploaded_by}}</p>
+                    </a>
+                    {% if subscribed == True %}
+                        <a href="/subscribe/?video={{video.video_id}}&subscribee={{video.uploaded_by}}&subscriber={{user}}">subscribed</a>
+                    {% else %}
+                        <a href="/subscribe/?video={{video.video_id}}&subscribee={{video.uploaded_by}}&subscriber={{user}}">subscribe</a>
+                    {% endif %}
+                    <p>subscriber count: {{subscribers_count}}</p>
+                    {% if liked == True %}
+                        <a href="/like/?video={{video.video_id}}">liked</a>
+                    {% else %}
+                        <a href="/like/?video={{video.video_id}}">like</a>
+                    {% endif %}
+                    <p>like count: {{likes_count}}</p>
+                </div>
                 <p>{{video.description}}</p>
-                <a href="/subscribe/?video={{video.video_id}}&subscribee={{video.uploaded_by}}&subscriber={{user}}">subscribe</a>
-                <p>{{subscribed}}</p>
-                <a href="/like/?video={{video.video_id}}">like</a>
-                <p>{{liked}}</p>
+
                 <form action="/comment/?id={{video.video_id}}" method="post">
                     {% csrf_token %}
                     <input type="text" name="comment" id="comment">
@@ -97,13 +110,13 @@
                 </form>
                 {% for entry in comments_data %}
                     <div>
-                        <a href="/user/?{{ entry.commented_by__username }}">{{ entry.commented_by__username }}</a>
+                        <a href="/user/?uname={{ entry.commented_by__username }}">{{ entry.commented_by__username }}</a>
                         <p>{{entry.content}}</p>
                     </div> 
                 {% endfor %}
             </div>
             <div class="main_right">
-                {% for entry in data %}
+                {% for entry in videos_data %}
                     <div> 
                         <a href="/video/?id={{entry.video_id}}">
                             <video class="vid">

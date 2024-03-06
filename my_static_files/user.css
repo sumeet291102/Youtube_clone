@@ -1,5 +1,36 @@
+.main {
+    padding: 0 15%;
+}
+
 .content {
     display: grid;
     gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.cover {
+    height: 200px;
+    width: 100%;
+    border-radius: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+.info {
+    display: flex;
+    padding: 20px 0;
+}
+
+.info_details {
+    padding-left: 20px;
+}
+
+.profile {
+    height: 150px;
+    width: 150px;
+    border-radius: 75px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
 }
