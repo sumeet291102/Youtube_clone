@@ -110,7 +110,7 @@ video {
 }
 
 .sidebar_button:hover {
-    background-color: gray;
+    background-color: rgb(222, 222, 222);
     border-radius: 20px;
 }
 

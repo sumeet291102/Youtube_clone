@@ -28,50 +28,66 @@
                 <img class="icon" src="{% static 'add-video-icon.svg' %}" alt="">
             </a>
             <img class="icon" src="{% static 'notification-bell-svgrepo-com.svg' %}" alt="">
-            {% if user == 'null' %}
-                <a class="lb" href="{% url 'login_page' %}">login</a>
-            {% else %}
+            {% if user.is_authenticated %}
                 <a class="lb" href="{% url 'logout_view' %}">logout</a>
+            {% else %}
+                <a class="lb" href="{% url 'login_page' %}">login</a>
             {% endif %}
         </div>
     </header>
     <div class="home">
         <div class="sidebar">
             <div class="sidebar_ele">
-                <div>
-                    <img class="icon" src="{% static 'icons8-home.svg' %}" alt="">
-                    <p>Home</p>
+                <div class="sidebar_button">
+                    <a href="/">
+                        <img class="icon" src="{% static 'icons8-home.svg' %}" alt="">
+                        <p>Home</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'icons8-youtube-shorts.svg' %}" alt="">
-                    <p>Shorts</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'icons8-youtube-shorts.svg' %}" alt="">
+                        <p>Shorts</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'video-playlist-icon.svg' %}" alt="">
-                    <p>subscriptions</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'video-playlist-icon.svg' %}" alt="">
+                        <p>subscriptions</p>
+                    </a>
                 </div>
             </div>
             <div class="sidebar_ele">
                 <p>You</p>
-                <div>
-                    <img class="icon" src="{% static 'user-channel(1).svg' %}" alt="">
-                    <p>Your channel</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'user-channel(1).svg' %}" alt="">
+                        <p>Your channel</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'history-svgrepo-com.svg' %}" alt="">
-                    <p>History</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'history-svgrepo-com.svg' %}" alt="">
+                        <p>History</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'play-1008-svgrepo-com.svg' %}" alt="">
-                    <p>Your Video</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'play-1008-svgrepo-com.svg' %}" alt="">
+                        <p>Your Video</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'watch-later.svg' %}" alt="">
-                    <p>Watch later</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'watch-later.svg' %}" alt="">
+                        <p>Watch later</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'like-svgrepo-com.svg' %}" alt="">
-                    <p>liked videos</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'like-svgrepo-com.svg' %}" alt="">
+                        <p>liked videos</p>
+                    </a>
                 </div>
             </div>
             <div class="sidebar_ele">
@@ -84,36 +100,67 @@
                     <source src="{{video.url}}" type="video/mp4">
                 </video> 
                 <p>{{video.title}}</p>
-                <div>
-                    <a href="/user/?uname={{video.uploaded_by}}">
-                        <p>{{video.uploaded_by}}</p>
-                    </a>
-                    {% if subscribed == True %}
-                        <a href="/subscribe/?video={{video.video_id}}&subscribee={{video.uploaded_by}}&subscriber={{user}}">subscribed</a>
-                    {% else %}
-                        <a href="/subscribe/?video={{video.video_id}}&subscribee={{video.uploaded_by}}&subscriber={{user}}">subscribe</a>
-                    {% endif %}
-                    <p>subscriber count: {{subscribers_count}}</p>
-                    {% if liked == True %}
-                        <a href="/like/?video={{video.video_id}}">liked</a>
-                    {% else %}
-                        <a href="/like/?video={{video.video_id}}">like</a>
-                    {% endif %}
-                    <p>like count: {{likes_count}}</p>
+                <div class="main_left_details">
+                    <div class="profile_details">
+                        {% if detail.profile_pic %}
+                            <div style="background-image:url('{{detail.profile_pic}}')" class="profile">
+                            </div>
+                        {% else %}
+                            <div style="background-image:url('{% static 'user-profile-avatar-svgrepo-com.svg' %}')" class="profile">
+                            </div>
+                        {% endif %}
+                        <div>
+                            <a href="/user/?uname={{video.uploaded_by}}">
+                                <p>{{video.uploaded_by}}</p>
+                            </a>
+                            <p>{{subscribers_count}} subscribers</p>
+                        </div>
+                        {% if subscribed == True %}
+                            <a href="/subscribe/?video={{video.video_id}}&subscribee={{video.uploaded_by}}&subscriber={{user}}">subscribed</a>
+                        {% else %}
+                            <a href="/subscribe/?video={{video.video_id}}&subscribee={{video.uploaded_by}}&subscriber={{user}}">subscribe</a>
+                        {% endif %}
+                    </div>
+                    <div class="like_details">
+                        {% if liked == True %}
+                            <a href="/like/?video={{video.video_id}}">liked</a>
+                        {% else %}
+                            <a href="/like/?video={{video.video_id}}">like</a>
+                        {% endif %}
+                        <p>{{likes_count}} likes</p>
+                    </div>
                 </div>
                 <p>{{video.description}}</p>
-
-                <form action="/comment/?id={{video.video_id}}" method="post">
+                <p>Comments</p>
+                <form action="/comment/?id={{video.video_id}}" method="post" class="create_comment">
                     {% csrf_token %}
-                    <input type="text" name="comment" id="comment">
-                    <button>post</button>
+                    {% if login_user_detail.profile_pic %}
+                        <div style="background-image:url('{{detail.profile_pic}}')" class="profile">
+                        </div>
+                    {% else %}
+                        <div style="background-image:url('{% static 'user-profile-avatar-svgrepo-com.svg' %}')" class="profile">
+                        </div>
+                    {% endif %}
+                    <input type="text" name="comment" id="comment" class="comment" placeholder="Add a comment..." required>
+                    <button>Comment</button>
                 </form>
-                {% for entry in comments_data %}
-                    <div>
-                        <a href="/user/?uname={{ entry.commented_by__username }}">{{ entry.commented_by__username }}</a>
-                        <p>{{entry.content}}</p>
-                    </div> 
-                {% endfor %}
+                <div class="comments">
+                    {% for entry in comments_data %}
+                        <div class="comment_data">
+                            {% if entry.profile_pic %}
+                                <div style="background-image:url('{{entry.profile_pic}}')" class="profile">
+                                </div>
+                            {% else %}
+                                <div style="background-image:url('{% static 'user-profile-avatar-svgrepo-com.svg' %}')" class="profile">
+                                </div>
+                            {% endif %}
+                            <div>
+                                <a href="/user/?uname={{ entry.commented_by__username }}">{{ entry.commented_by__username }}</a>
+                                <p>{{entry.content}}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
             <div class="main_right">
                 {% for entry in videos_data %}

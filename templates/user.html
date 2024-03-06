@@ -28,50 +28,66 @@
                 <img class="icon" src="{% static 'add-video-icon.svg' %}" alt="">
             </a>
             <img class="icon" src="{% static 'notification-bell-svgrepo-com.svg' %}" alt="">
-            {% if user == 'null' %}
-                <a class="lb" href="{% url 'login_page' %}">login</a>
-            {% else %}
+            {% if user.is_authenticated %}
                 <a class="lb" href="{% url 'logout_view' %}">logout</a>
+            {% else %}
+                <a class="lb" href="{% url 'login_page' %}">login</a>
             {% endif %}
         </div>
     </header>
     <div class="home">
         <div class="sidebar">
             <div class="sidebar_ele">
-                <div>
-                    <img class="icon" src="{% static 'icons8-home.svg' %}" alt="">
-                    <p>Home</p>
+                <div class="sidebar_button">
+                    <a href="/">
+                        <img class="icon" src="{% static 'icons8-home.svg' %}" alt="">
+                        <p>Home</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'icons8-youtube-shorts.svg' %}" alt="">
-                    <p>Shorts</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'icons8-youtube-shorts.svg' %}" alt="">
+                        <p>Shorts</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'video-playlist-icon.svg' %}" alt="">
-                    <p>subscriptions</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'video-playlist-icon.svg' %}" alt="">
+                        <p>subscriptions</p>
+                    </a>
                 </div>
             </div>
             <div class="sidebar_ele">
                 <p>You</p>
-                <div>
-                    <img class="icon" src="{% static 'user-channel(1).svg' %}" alt="">
-                    <p>Your channel</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'user-channel(1).svg' %}" alt="">
+                        <p>Your channel</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'history-svgrepo-com.svg' %}" alt="">
-                    <p>History</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'history-svgrepo-com.svg' %}" alt="">
+                        <p>History</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'play-1008-svgrepo-com.svg' %}" alt="">
-                    <p>Your Video</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'play-1008-svgrepo-com.svg' %}" alt="">
+                        <p>Your Video</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'watch-later.svg' %}" alt="">
-                    <p>Watch later</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'watch-later.svg' %}" alt="">
+                        <p>Watch later</p>
+                    </a>
                 </div>
-                <div>
-                    <img class="icon" src="{% static 'like-svgrepo-com.svg' %}" alt="">
-                    <p>liked videos</p>
+                <div class="sidebar_button">
+                    <a href="">
+                        <img class="icon" src="{% static 'like-svgrepo-com.svg' %}" alt="">
+                        <p>liked videos</p>
+                    </a>
                 </div>
             </div>
             <div class="sidebar_ele">

@@ -71,7 +71,20 @@ def video_page(request, *args, **kwargs):
     likes_count = Like.objects.filter(like_video=video).count
     subscribers_count = Subscribe.objects.filter(subscribee=video.uploaded_by).count
     comment_data = Comment.objects.filter(comment_video=video).values('content', 'commented_by__username')
+    comment_arr = []
+    for row in comment_data:
+        curr = {}
+        curr['content'] = row['content']
+        curr['commented_by__username'] = row['commented_by__username']
+        curr['profile_pic'] = Detail.objects.get(user=User.objects.get(username=row['commented_by__username'])).profile_pic
+        comment_arr.append(curr)
+
     video_data = Video.objects.values('title', 'url', 'uploaded_by__username', 'video_id')
+    detail = Detail.objects.get(user=video.uploaded_by)
+    login_user_detail = {}
+
+    if (request.user.id is not None):
+        login_user_detail = Detail.objects.get(user=request.user)
 
     liked = True
     subscribed = True
@@ -81,7 +94,7 @@ def video_page(request, *args, **kwargs):
     if not subscribe_query:
         subscribed = False
 
-    return render(request, 'video.html', {'video': video, 'liked': liked, 'subscribed': subscribed, 'videos_data': video_data, 'comments_data': comment_data, 'likes_count': likes_count, 'subscribers_count': subscribers_count})
+    return render(request, 'video.html', {'video': video, 'liked': liked, 'subscribed': subscribed, 'videos_data': video_data, 'comments_data': comment_arr, 'likes_count': likes_count, 'subscribers_count': subscribers_count, 'detail': detail, 'login_user_detail': login_user_detail})
 
 
 def user_page(request, *args, **kwargs):
