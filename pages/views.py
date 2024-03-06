@@ -9,15 +9,22 @@ from django.core.files.storage import FileSystemStorage
 
 def home_page(request, *args, **kwargs):
     data = Video.objects.values('title', 'url', 'uploaded_by__username', 'video_id')
-    return render(request, 'home.html', {'data': data})
+    detail = {}
+    if (request.user.id is not None):
+        detail = Detail.objects.get(user=request.user)
+
+    return render(request, 'home.html', {'data': data, 'detail': detail})
 
 
 def signup_page(request, *args, **kwargs):
     if (request.POST):
-        curr_user = User.objects.create_user(request.POST['name'], request.POST['email'], request.POST['password'], first_name=request.POST['first_name'], last_name=request.POST['last_name'])
-        curr_user.save()
-        Detail(user=curr_user).save()
-        return redirect(home_page)
+        if(User.objects.filter(username=request.POST['name'])):
+            return render(request, 'signup.html', {'error': 'user with this username already exists!!'})
+        else:
+            curr_user = User.objects.create_user(request.POST['name'], request.POST['email'], request.POST['password'], first_name=request.POST['first_name'], last_name=request.POST['last_name'])
+            curr_user.save()
+            Detail(user=curr_user).save()
+            return redirect(home_page)
     else:
         return render(request, 'signup.html')
 
@@ -29,7 +36,7 @@ def login_page(request, *args, **kwargs):
             login(request, user)
             return redirect(home_page)
         else:
-            return render(request, 'login.html')
+            return render(request, 'login.html', {'error': 'invalid username or password!!'})
     else:
         return render(request, 'login.html')
 
@@ -45,7 +52,10 @@ def create_page(request, *args, **kwargs):
         return redirect(home_page)
 
     else:
-        return render(request, 'create.html')
+        if (request.user.id is not None):
+            return render(request, 'create.html')
+        else:
+            return redirect(login_page)
 
 
 def update_page(request, *args, **kwargs):
@@ -116,47 +126,56 @@ def logout_view(request, *args, **kwargs):
 
 
 def like_view(request, *args, **kwargs):
-    video = Video.objects.get(video_id=request.GET.get('video'))
-    user = User.objects.get(username=request.user)
-    allready_liked = Like.objects.filter(like_video=video, liked_by=user)
+    if (request.user.id is not None):
+        video = Video.objects.get(video_id=request.GET.get('video'))
+        user = User.objects.get(username=request.user)
+        allready_liked = Like.objects.filter(like_video=video, liked_by=user)
 
-    if not allready_liked:
-        new_like = Like(like_video=video, liked_by=user)
-        new_like.save()
+        if not allready_liked:
+            new_like = Like(like_video=video, liked_by=user)
+            new_like.save()
 
+        else:
+            allready_liked.delete()
+
+        url = "/video?id="+request.GET.get('video')
+        return redirect(url)
     else:
-        allready_liked.delete()
-
-    url = "/video?id="+request.GET.get('video')
-    return redirect(url)
+        return redirect(login_page)
 
 
 def comment_view(request, *args, **kwargs):
-    video = Video.objects.get(video_id=request.GET.get('id'))
-    user = User.objects.get(username=request.user)
-    comment_content = request.POST['comment']
-    new_comment = Comment(comment_video=video, commented_by=user, content=comment_content)
-    new_comment.save()
+    if (request.user.id is not None):
+        video = Video.objects.get(video_id=request.GET.get('id'))
+        user = User.objects.get(username=request.user)
+        comment_content = request.POST['comment']
+        new_comment = Comment(comment_video=video, commented_by=user, content=comment_content)
+        new_comment.save()
 
-    url = "/video?id="+request.GET.get('id')
-    return redirect(url)
+        url = "/video?id="+request.GET.get('id')
+        return redirect(url)
+    else:
+        return redirect(login_page)
 
 
 def subscribe_view(request, *args, **kwargs):
-    user_subscribee = User.objects.get(username=request.GET.get('subscribee'))
-    user_subscriber = User.objects.get(username=request.GET.get('subscriber'))
-    allready_subscribed = Subscribe.objects.filter(subscriber=user_subscriber, subscribee=user_subscribee)
+    if (request.user.id is not None):
+        user_subscribee = User.objects.get(username=request.GET.get('subscribee'))
+        user_subscriber = User.objects.get(username=request.GET.get('subscriber'))
+        allready_subscribed = Subscribe.objects.filter(subscriber=user_subscriber, subscribee=user_subscribee)
 
-    if not allready_subscribed:
-        new_connection = Subscribe(subscriber=user_subscriber, subscribee=user_subscribee)
-        new_connection.save()
+        if not allready_subscribed:
+            new_connection = Subscribe(subscriber=user_subscriber, subscribee=user_subscribee)
+            new_connection.save()
 
+        else:
+            allready_subscribed.delete()
+
+        if (request.GET.get('video') is not None):
+            url = "/video?id="+request.GET.get('video')
+        else:
+            url = "/user?uname="+request.GET.get('uname')
+
+        return redirect(url)
     else:
-        allready_subscribed.delete()
-
-    if (request.GET.get('video') is not None):
-        url = "/video?id="+request.GET.get('video')
-    else:
-        url = "/user?uname="+request.GET.get('uname')
-
-    return redirect(url)
+        return redirect(login_page)

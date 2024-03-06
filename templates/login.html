@@ -18,6 +18,9 @@
                 <p>Log in</p> 
                 <p>to continue to YouTube</p>
             </div>
+            {% if error %}
+                <p style="color:red">{{error}}</p>
+            {% endif %}
             <input type="text" name="name" id="" placeholder="username">
             <input type="password" name="password" id="" placeholder="password">
             <div class="form_footer">

@@ -16,6 +16,9 @@
                 <img src="{% static 'Google-Logo.wine.svg' %}" alt="">
             </div>
             <p>Create a YouTube Account</p>
+            {% if error %}
+                <p style="color:red">{{error}}</p>
+            {% endif %}
             <input type="text" name="name" id="" placeholder="username"  required>
             <input type="text" name="first_name" id="" placeholder="first name" required>
             <input type="text" name="last_name" id="" placeholder="last name" required>

@@ -30,6 +30,15 @@
             <img class="icon" src="{% static 'notification-bell-svgrepo-com.svg' %}" alt="">
             {% if user.is_authenticated %}
                 <a class="lb" href="{% url 'logout_view' %}">logout</a>
+                <a href="/user/?uname={{user}}">
+                    {% if detail.profile_pic %}
+                        <div style="background-image:url('{{detail.profile_pic}}')" class="header_profile">
+                        </div>
+                    {% else %}
+                        <div style="background-image:url('{% static 'user-profile-avatar-svgrepo-com.svg' %}')" class="header_profile">
+                        </div>
+                    {% endif %}
+                </a>
             {% else %}
                 <a class="lb" href="{% url 'login_page' %}">login</a>
             {% endif %}
@@ -124,9 +133,11 @@
                                 <a href="/subscribe/?uname={{curr_user}}&subscribee={{curr_user}}&subscriber={{user}}">subscribe</a>
                             </p>
                         {% endif %}
-                        <p>
-                            <a href="/update/?uname={{user}}">edit profile</a>
-                        </p>
+                        {% if curr_user == user %}
+                            <p>
+                                <a href="/update/?uname={{user}}">edit profile</a>
+                            </p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
